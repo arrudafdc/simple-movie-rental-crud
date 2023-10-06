@@ -7,6 +7,8 @@ import { GetMoviesByRelease } from "./controllers/get-movies-by-release/GetMovie
 import { PostgresGetMoviesByRelease } from "./repositories/get-movies-by-release/PostgresGetMoviesByRelease";
 import { PostgresCreateMovieRent } from "./repositories/create-movie-rent/PostgresCreateMovieRent";
 import { CreateMovieRentController } from "./controllers/create-movie-rent/CreateMovieRentController";
+import { PostgresGetUsers } from "./repositories/get-users/PostgresGetUsers";
+import { GetUsersController } from "./controllers/get-users/GetUsersController";
 
 const routes = Router();
 
@@ -34,6 +36,12 @@ routes.get("/movies", (req, res) => {
   const postgresCreateMovies = new PostgresGetMoviesByRelease();
   const getMoviesByRelease = new GetMoviesByRelease(postgresCreateMovies);
   getMoviesByRelease.handle(res);
+});
+
+routes.get("/users", (req, res) => {
+  const postgresGetUsers = new PostgresGetUsers();
+  const getUserController = new GetUsersController(postgresGetUsers);
+  getUserController.handle(res);
 });
 
 export default routes;
